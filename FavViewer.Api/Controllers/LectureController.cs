@@ -13,6 +13,6 @@ namespace FavViewer.Api.Controllers
         /// <param name="id">Identifiant de la vidéo.</param>
         /// <returns>Lien url.</returns>
         [HttpGet("{id}")]
-        public string? Get([FromRoute] int id) => lienVideoRepo.Obtenir(id);
+        public IActionResult Get([FromRoute] int id) => Redirect(lienVideoRepo.Obtenir(id) ?? throw new Exception("Lien introuvable."));
     }
 }

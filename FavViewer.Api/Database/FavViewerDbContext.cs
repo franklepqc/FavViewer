@@ -2,7 +2,7 @@
 
 namespace FavViewer.Api.Database
 {
-    public class FavViewerDbContext : DbContext
+    public class FavViewerDbContext(DbContextOptions options) : DbContext(options)
     {
         /// <summary>
         /// Table des liens.

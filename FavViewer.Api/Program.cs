@@ -25,4 +25,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Mise à jour de la BD.
+using var scope = app.Services.CreateScope();
+using var dbContext = scope.ServiceProvider.GetRequiredService<FavViewerDbContext>();
+dbContext.Database.Migrate();
+
 app.Run();
