@@ -3,6 +3,10 @@
 
 name: Node.js CI - Déployer l'application web
 
+defaults:
+  run:
+    working-directory: FavViewerWeb
+
 on:
   push:
     branches: [ "main" ]
@@ -20,7 +24,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run: cd FavViewerWeb
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
