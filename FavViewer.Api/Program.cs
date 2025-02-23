@@ -9,7 +9,7 @@ builder.Services.AddDbContext<FavViewerDbContext>(opts =>
 {
     if (!opts.IsConfigured)
     {
-        opts.UseSqlite("Data Source=liens.db");
+        opts.UseSqlite(builder.Configuration.GetConnectionString("FavViewerDbContext"));
     }
 });
 
