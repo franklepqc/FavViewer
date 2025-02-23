@@ -17,6 +17,14 @@ builder.Services.AddScoped<ILienVideoRepo, LienVideoRepo>();
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(cfg =>
+{
+    cfg.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +32,8 @@ var app = builder.Build();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 // Mise à jour de la BD.
 using var scope = app.Services.CreateScope();
