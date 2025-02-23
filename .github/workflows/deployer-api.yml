@@ -1,0 +1,30 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET - Déployer API
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    - name: Restore dependencies
+      run: dotnet restore FavViewer.Api/FavViewer.Api.csproj
+    - name: Publish
+      run: dotnet publish --no-restore -o FavViewer.Api/out/ -r linux-musl-x64 --sc FavViewer.Api/FavViewer.Api.csproj
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.1
+      with:
+        path: FavViewer.Api/out/
