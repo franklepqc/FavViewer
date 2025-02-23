@@ -10,8 +10,12 @@ defaults:
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - FavViewerWeb/**
   pull_request:
     branches: [ "main" ]
+    paths:
+      - FavViewerWeb/**
 
 jobs:
   build:
