@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class LiensService {
 
   // Url.
-  private url: string = 'http://localhost:5207/lien';
+  private url: string = '/lien';
 
   constructor(private httpClient: HttpClient) { }
 
