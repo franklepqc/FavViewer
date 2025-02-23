@@ -6,8 +6,12 @@ name: .NET - Déployer API
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - FavViewer.Api/**
   pull_request:
     branches: [ "main" ]
+    paths:
+      - FavViewer.Api/**
 
 jobs:
   build:
