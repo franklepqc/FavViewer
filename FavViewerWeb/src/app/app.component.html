@@ -1,0 +1,41 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <td>
+        <th>Titre</th>
+        <th>Actions</th>
+      </td>
+    </thead>
+    <tbody>
+      <tr *ngFor="const l of this.liens">
+        <td>{{ l.titre }}</td>
+        <td>
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-outline-success" title="Lecture" (click)="ouvrirLecture(l.id)">
+                <i class="bi bi-play"></i>
+                <span>Lecture</span>
+              </button>
+            </div>
+            <div class="col">
+              <button class="btn btn-danger" title="Supprimer" (click)="supprimer(l.id)">
+                <i class="bi bi-bin"></i>
+                <span>Supprimer</span>
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary" title="Ajouter">
+            <i class="bi bi-plus"></i>
+            <span>Ajouter</span>
+          </button>
+        </div>
+      </div>
+    </tfoot>
+  </table>
+</div>
