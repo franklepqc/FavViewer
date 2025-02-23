@@ -1,41 +1,58 @@
 <div class="container">
-  <table class="table">
-    <thead>
-      <td>
-        <th>Titre</th>
-        <th>Actions</th>
-      </td>
-    </thead>
-    <tbody>
-      <tr *ngFor="const l of this.liens">
-        <td>{{ l.titre }}</td>
-        <td>
-          <div class="row">
-            <div class="col">
-              <button class="btn btn-outline-success" title="Lecture" (click)="ouvrirLecture(l.id)">
-                <i class="bi bi-play"></i>
-                <span>Lecture</span>
-              </button>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of this.liens">
+          <td><span>{{ l.titre }}</span></td>
+          <td>
+            <div class="row">
+              <div class="col">
+                <a class="btn btn-outline-success" [href]="l.url" target="_blank">
+                  <i class="bi bi-play"></i>
+                  <span class="ms-1">Lecture</span>
+                </a>
+              </div>
+              <div class="col">
+                <button class="btn btn-danger" title="Supprimer" (click)="supprimer(l.id)">
+                  <i class="bi bi-trash"></i>
+                  <span class="ms-1">Supprimer</span>
+                </button>
+              </div>
             </div>
-            <div class="col">
-              <button class="btn btn-danger" title="Supprimer" (click)="supprimer(l.id)">
-                <i class="bi bi-bin"></i>
-                <span>Supprimer</span>
-              </button>
-            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <form [formGroup]="this.formAjout" (ngSubmit)="ajouter()">
+      <div class="card">
+        <div class="card-header">
+          <span>Ajouter</span>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label" for="titre">Titre :</label>
+            <input class="form-control" id="titre" type="text" formControlName="titre">
           </div>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <div class="row">
-        <div class="col">
-          <button class="btn btn-primary" title="Ajouter">
+          <div class="mb-3">
+            <label class="form-label" for="url">Url :</label>
+            <input class="form-control" id="url" type="text" formControlName="url">
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" title="Ajouter" type="submit">
             <i class="bi bi-plus"></i>
             <span>Ajouter</span>
           </button>
         </div>
       </div>
-    </tfoot>
-  </table>
+    </form>
+  </div>  
 </div>
