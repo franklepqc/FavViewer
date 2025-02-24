@@ -50,13 +50,6 @@ namespace FavViewer.Api.Repos
         public IEnumerable<LienVideo> Obtenir() => dbContext.Liens.ToList().Select(k => new LienVideo { Id = k.Id, Titre = k.Titre, Url = k.Url });
 
         /// <summary>
-        /// Obtenir l'url d'un enregistrement.
-        /// </summary>
-        /// <param name="id">Identifiant.</param>
-        /// <returns>Url.</returns>
-        public string? Obtenir(int id) => dbContext.Liens.Find(id)?.Url;
-
-        /// <summary>
         /// Supprimer le lien.
         /// </summary>
         /// <param name="id">Identifiant.</param>
