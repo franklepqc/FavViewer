@@ -1,4 +1,6 @@
-﻿using FavViewer.Api.Database;
+﻿using AutoMapper;
+using FavViewer.Api.Database;
+using FavViewer.Api.Mappings;
 using FavViewer.Api.Models;
 using FavViewer.Api.Repos.Interfaces;
 
@@ -6,6 +8,11 @@ namespace FavViewer.Api.Repos
 {
     public class LienVideoRepo(FavViewerDbContext dbContext, ILogger<LienVideoRepo>? logger) : ILienVideoRepo
     {
+        /// <summary>
+        /// Système de mapping.
+        /// </summary>
+        private readonly Mapper _mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<LienMappings>()));
+
         /// <summary>
         /// Ajouter le lien.
         /// </summary>
@@ -16,12 +23,7 @@ namespace FavViewer.Api.Repos
             try
             {
                 // Nouvelle entité.
-                var nouveauLienDb = new LienVideoDbEntity
-                {
-                    Id = 0,
-                    Titre = lienVideo.Titre,
-                    Url = lienVideo.Url
-                };
+                var nouveauLienDb = _mapper.Map<LienVideoDbEntity>(lienVideo);
 
                 // Ajout.
                 dbContext.Liens.Add(nouveauLienDb);
@@ -47,7 +49,7 @@ namespace FavViewer.Api.Repos
         /// Obtenir tous les liens.
         /// </summary>
         /// <returns>Liste.</returns>
-        public IEnumerable<LienVideo> Obtenir() => dbContext.Liens.ToList().Select(k => new LienVideo { Id = k.Id, Titre = k.Titre, Url = k.Url });
+        public IEnumerable<LienVideo> Obtenir() => dbContext.Liens.ToList().Select(_mapper.Map<LienVideo>);
 
         /// <summary>
         /// Supprimer le lien.
